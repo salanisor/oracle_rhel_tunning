@@ -7,13 +7,14 @@ NUMA may be required when running a specific type of virtual machine such as one
 
 To disable NUMA and transparent huge pages in *rhel 7* take the following steps:
 
-**NOTE**: `you should always perform a full OS backup prior to any changes`
+**NOTE**: `You should always perform a full OS backup prior to any changes`
 
 - Step 1.) Disable Numa by adding the command line option `numa=off` to grub2 config.
 - Step 2.) Disable transparent huge pages by adding the command line option `transparent_hugepage=never` to grub2 config.
-- Step 3.) Rebuild the grub2 menu.
-- Step 4.) Reboot system to have settings take affect.
-- Step 5.) Verify settings.
+- Step 3.) Install and set the tuned profile to `oracle`
+- Step 4.) Rebuild the grub2 menu.
+- Step 5.) Reboot system to have settings take affect.
+- Step 6.) Verify settings.
 
 
 #### How to run playboook
