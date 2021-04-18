@@ -10,9 +10,14 @@
   - name: "get the rpm package facts"
     package_facts:
       manager: "auto"
-  - name: "Checking GRUB cmdline"
+  - name: "Checking GRUB cmdline for numa"
     shell: "grep 'GRUB_CMDLINE_LINUX=.*numa.*' /etc/default/grub"
-    register: grub_cfg_grep
+    register: grub_cfg_grep_numa
+    changed_when: false
+    failed_when: false
+  - name: "Checking GRUB cmdline for transparent"
+    shell: "grep 'GRUB_CMDLINE_LINUX=.*transparent.*' /etc/default/grub"
+    register: grub_cfg_grep_transparent
     changed_when: false
     failed_when: false
   - name: "Install tuned-profiles-oracle package"
@@ -37,13 +42,22 @@
       ansible.builtin.copy:
         src: "/etc/default/grub"
         dest: "/etc/default/grub.{{ date }}"
-    - name: "Configuring GRUB cmdline"
+      when: (grub_cfg_grep_numa.rc == 1) or
+            (grub_cfg_grep_transparent.rc == 1)
+    - name: "Configuring GRUB cmdline for numa"
       replace:
         path: '/etc/default/grub'
         regexp: '^GRUB_CMDLINE_LINUX="((\w.?)*)"$'
         replace: 'GRUB_CMDLINE_LINUX="\1 numa=off"'
       register: grub
-    when: grub_cfg_grep.rc == 1
+      when: grub_cfg_grep_numa.rc == 1
+    - name: "Configuring GRUB cmdline for transparent huge pages"
+      replace:
+        path: '/etc/default/grub'
+        regexp: '^GRUB_CMDLINE_LINUX="((\w.?)*)"$'
+        replace: 'GRUB_CMDLINE_LINUX="\1 transparent_hugepage=never"'
+      register: grub
+      when: grub_cfg_grep_transparent.rc == 1
   - name: "Update the bootloader config from /etc/default/grub"
     command: |
         grub2-mkconfig -o /boot/grub2/grub.cfg
