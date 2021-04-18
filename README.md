@@ -34,6 +34,44 @@ cat /proc/cmdline
 ```
 
 Expected output:
+
 ```
 BOOT_IMAGE=/vmlinuz-3.10.0-1160.15.2.el7.x86_64 root=/dev/mapper/rhel_rhel7-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=rhel_rhel7/root rd.lvm.lv=rhel_rhel7/swap rhgb quiet numa=off transparent_hugepage=never
 ``` 
+
+#### [Oracle tuned profile](https://www.mankier.com/7/tuned-profiles-oracle)
+
+
+`usr/lib/tuned/oracle/tuned.conf`
+
+```
+#
+# tuned configuration
+#
+
+[main]
+summary=Optimize for Oracle RDBMS
+include=throughput-performance
+
+[sysctl]
+vm.swappiness = 10
+vm.dirty_background_ratio = 3
+vm.dirty_ratio = 40
+vm.dirty_expire_centisecs = 500
+vm.dirty_writeback_centisecs = 100
+kernel.shmmax = 4398046511104
+kernel.shmall = 1073741824
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+fs.file-max = 6815744
+fs.aio-max-nr = 1048576
+net.ipv4.ip_local_port_range = 9000 65499
+net.core.rmem_default = 262144
+net.core.rmem_max = 4194304
+net.core.wmem_default = 262144
+net.core.wmem_max = 1048576
+kernel.panic_on_oops = 1
+
+[vm]
+transparent_hugepages=never
+```
