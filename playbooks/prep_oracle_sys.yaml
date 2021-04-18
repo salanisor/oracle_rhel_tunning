@@ -1,8 +1,13 @@
 ---
-# An ansible playbook to configure RHEL 7 with the recommended practices to tune and run Oracle 12g DB.
+# An ansible playbook to configure RHEL 7 with the recommended practices to tune and run Oracle workloads.
+# See links for further information.
 # For RHEL & Oracle DB versions please see solution: https://access.redhat.com/solutions/39188
 # For setting the Oracle tuned profile see solution: https://access.redhat.com/solutions/2867881
 # 
+# How to run playbook:
+#
+# ansible-playbook -vvv prep_oracle_sys.yaml
+ 
 - hosts: 127.0.0.1
   connection: local
   gather_facts: yes
