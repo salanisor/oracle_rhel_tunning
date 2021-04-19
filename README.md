@@ -43,7 +43,7 @@ BOOT_IMAGE=/vmlinuz-3.10.0-1160.15.2.el7.x86_64 root=/dev/mapper/rhel_rhel7-root
 #### [Oracle tuned profile](https://www.mankier.com/7/tuned-profiles-oracle)
 
 
-`usr/lib/tuned/oracle/tuned.conf`
+`/usr/lib/tuned/oracle/tuned.conf`
 
 ```
 #
