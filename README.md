@@ -34,7 +34,7 @@ To verify that `numa=off` & `transparent_hugepage=never` settings took effect ru
 cat /proc/cmdline 
 ```
 
-Expected output:
+Expected output example:
 
 ```
 BOOT_IMAGE=/vmlinuz-3.10.0-1160.15.2.el7.x86_64 root=/dev/mapper/rhel_rhel7-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=rhel_rhel7/root rd.lvm.lv=rhel_rhel7/swap rhgb quiet numa=off transparent_hugepage=never
