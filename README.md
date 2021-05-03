@@ -46,13 +46,7 @@ BOOT_IMAGE=/vmlinuz-3.10.0-1160.15.2.el7.x86_64 root=/dev/mapper/rhel_rhel7-root
 `/usr/lib/tuned/oracle/tuned.conf`
 
 #### tuned configuration
-```
-[main]
-summary=Optimize for Oracle RDBMS
-include=throughput-performance
 
-[sysctl]
-```
 Swappiness is defined as a value from `0` to `100` which controls the degree to which the system
 favors anonymous memory or the page cache. A high valueimproves file-system performance, while
 aggressively swapping less active processes out of memory. A low value avoids swapping processes
@@ -171,9 +165,4 @@ bug is encountered. By default the value is set to `1`, however, the oracle inst
 be set within the `/etc/sysctl.conf` file.
 ```
 kernel.panic_on_oops = 1
-```
-
-```
-[vm]
-transparent_hugepages=never
 ```
