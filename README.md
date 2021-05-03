@@ -125,9 +125,8 @@ kernel.sem = 250 32000 100 128
 ```
 While the value of the **FS.FILE-MAX** parameter varies upon every environment, this reference
 environment sets the value at `6815744`. Oracle recommends a value no smaller than
-`6815744`. Due to the calculation in the above example equating to 5050858, the minimum
-Oracle recommended value is used. In order to add **FS.FILE-MAX** to `6815744`, modify the
-`/etc/sysctl.conf` file on each node of the Oracle RAC cluster as follows:
+`6815744`.  In order to add **FS.FILE-MAX** to `6815744`, modify the `/etc/sysctl.conf` file on
+each node of the Oracle RAC cluster as follows:
 ```
 fs.file-max = 6815744
 ```
@@ -151,7 +150,7 @@ net.ipv4.ip_local_port_range = 9000 65499
 
 Optimizing the network settings for the default and maximum buffers for the application
 sockets in Oracle is done by setting static sizes to **RMEM** and **WMEM** . The **RMEM** parameter
-represents the receive buffer size, while the WMEM represents the send buffer size. The
+represents the receive buffer size, while the **WMEM** represents the send buffer size. The
 recommended values by Oracle are configured within the /etc/sysctl.conf file on each node of
 the Oracle RAC cluster.
 ```
