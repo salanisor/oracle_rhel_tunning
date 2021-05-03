@@ -24,7 +24,7 @@ tuned-adm profile oracle
 cp /etc/default/grub /etc/default/grub-`date +%Y%m%d%s`
 ```
 
-  - Step 5) Append the following text `numa=off transparent_hugepage=never` to the end of line starting with `GRUB_CMDLINE_LINUX=` in file `/etc/default/grub`
+  - Step 5) Append the following text `numa=off transparent_hugepage=never` to the end of line - starting with: `GRUB_CMDLINE_LINUX=` in file `/etc/default/grub`
 
   - Step 6) Update the bootloader config from the previous update to `/etc/default/grub`
 
