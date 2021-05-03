@@ -118,7 +118,7 @@ processes. The kernel parameter sem is composed of four parameters:
 **SEMMNI** – is defined as the maximum number of semaphore sets for the entire system
 **SEMMNS** – is defined as the total number of semaphores for the entire system
 
-**NOTE**: SEMMNS is calculated by SEMMSL * SEMMNI – is defined as the total number of semaphore operations
+**NOTE**: `SEMMNS` is calculated by `SEMMSL * SEMMNI` – is defined as the total number of semaphore operations
 performed per semop system call.
 
 **SEMOPM** – is defined as the total number of semaphore operations performed per semop
