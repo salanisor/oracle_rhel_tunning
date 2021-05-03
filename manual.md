@@ -34,7 +34,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
   - Step 7) Reboot the server to pick up the additional kernel parameters from the previous update.
 
-  - Step 8) Get active tuned profile to verify changes.
+  - Step 8) Get the active tuned profile to verify changes.
 
 ```
 tuned-adm active
@@ -44,4 +44,15 @@ Expected output:
 
 ```
 Current active profile: oracle
+```
+
+  - Step 9)
+
+```
+egrep -i 'numa|transparent' /proc/cmdline
+```
+
+Expected output:
+```
+BOOT_IMAGE=/vmlinuz-3.10.0-1160.15.2.el7.x86_64 root=/dev/mapper/rhel_rhel7-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=rhel_rhel7/root rd.lvm.lv=rhel_rhel7/swap rhgb quiet numa=off transparent_hugepage=never
 ```
