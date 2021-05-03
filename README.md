@@ -48,7 +48,7 @@ BOOT_IMAGE=/vmlinuz-3.10.0-1160.15.2.el7.x86_64 root=/dev/mapper/rhel_rhel7-root
 #### tuned configuration
 
 Swappiness is defined as a value from `0` to `100` which controls the degree to which the system
-favors anonymous memory or the page cache. A high valueimproves file-system performance, while
+favors anonymous memory or the page cache. A high value improves file-system performance, while
 aggressively swapping less active processes out of memory. A low value avoids swapping processes
 out of memory, which usually decreases latency, at the cost of I/O performance.
   
