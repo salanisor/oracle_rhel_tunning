@@ -46,7 +46,7 @@ Expected output:
 Current active profile: oracle
 ```
 
-  - Step 9) Verify the newly added kernel parameters.
+  - **Step 9)** Verify the newly added kernel parameters.
 
 ```
 egrep -i 'numa|transparent' /proc/cmdline
