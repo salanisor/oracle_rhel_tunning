@@ -113,14 +113,14 @@ kernel.shmmni = 4096
 Red Hat Enterprise Linux 7 provides semaphores for synchronization of information between
 processes. The kernel parameter sem is composed of four parameters:
 
-SEMMSL – is defined as the maximum number of semaphores per semaphore set
-SEMMNI – is defined as the maximum number of semaphore sets for the entire system
-SEMMNS – is defined as the total number of semaphores for the entire system
+**SEMMSL** – is defined as the maximum number of semaphores per semaphore set
+**SEMMNI** – is defined as the maximum number of semaphore sets for the entire system
+**SEMMNS** – is defined as the total number of semaphores for the entire system
 
-NOTE: SEMMNS is calculated by SEMMSL * SEMMNI – is defined as the total number of semaphore operations
+**NOTE**: SEMMNS is calculated by SEMMSL * SEMMNI – is defined as the total number of semaphore operations
 performed per semop system call.
 
-SEMOPM – is defined as the total number of semaphore operations performed per semop
+**SEMOPM** – is defined as the total number of semaphore operations performed per semop
 system call.
 
 The following line is required within the /etc/sysctl.conf file to provide sufficient semaphores
@@ -128,25 +128,34 @@ for Oracle:
 ```
 kernel.sem = 250 32000 100 128
 ```
-While the value of the FS.FILE-MAX parameter varies upon every environment, this reference
+While the value of the **FS.FILE-MAX** parameter varies upon every environment, this reference
 environment sets the value at `6815744`. Oracle recommends a value no smaller than
-6815744. Due to the calculation in the above example equating to 5050858, the minimum
-Oracle recommended value is used. In order to add FS . FILE - MAX to 6815744, modify the
+`6815744`. Due to the calculation in the above example equating to 5050858, the minimum
+Oracle recommended value is used. In order to add **FS.FILE-MAX** to `6815744`, modify the
 `/etc/sysctl.conf` file on each node of the Oracle RAC cluster as follows:
 ```
 fs.file-max = 6815744
 ```
 
+The kernel parameter **FS.AIO-MAX** - NR sets the maximum number of current asynchronous I/O
+requests. Oracle recommends setting the value to `1048576`. In order to add **FS-AIO-MAX-NR** to
+`1048576`, modify the `/etc/sysctl.conf` file on each node of the Oracle RAC cluster as follows:
+
+
 ```
 fs.aio-max-nr = 1048576
 ```
 
+Oracle recommends that the ephemeral default port range be set starting at `9000` to `65500`.
+This ensures that all well known ports used by Oracle and other applications are avoided. To
+set the ephemeral port range, modify the `/etc/sysctl.conf` file on each node of the Oracle RAC
+Database cluster and add the following line.
 ```
 net.ipv4.ip_local_port_range = 9000 65499
 ```
 
 Optimizing the network settings for the default and maximum buffers for the application
-sockets in Oracle is done by setting static sizes to RMEM and WMEM . The RMEM parameter
+sockets in Oracle is done by setting static sizes to **RMEM** and **WMEM** . The **RMEM** parameter
 represents the receive buffer size, while the WMEM represents the send buffer size. The
 recommended values by Oracle are configured within the /etc/sysctl.conf file on each node of
 the Oracle RAC cluster.
