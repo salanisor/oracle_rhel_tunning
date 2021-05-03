@@ -55,8 +55,20 @@ summary=Optimize for Oracle RDBMS
 include=throughput-performance
 
 [sysctl]
+
+# Swappiness is defined as a value from 0 to 100 which controls the degree to which the system favors anonymous memory or the page cache. A high value
+improves file-system performance, while aggressively swapping less active processes out of memory. A low value avoids swapping processes out of memory, which usually decreases latency, at the cost of I/O performance.
+  
+# Swapping for Oracle is not ideal and should be avoided as much as possible. The following tunable will tune the kernel to swap less aggressively.
+
 vm.swappiness = 10
+
+# Contains, as a percentage of total system memory, the number of pages at which the background write back daemon will start writing out dirty data. The Oracle recommended value is 3.
+
 vm.dirty_background_ratio = 3
+
+# Contains, as a percentage of total system memory, the number of pages at which a process which is generating disk writes will itself start writing out dirty data. The default value is 20. The recommended value is between 40 and 80. The reasoning behind increasing the value from the standard Oracle 15 recommendation to a value between 40 and 80 is because dirty ratio defines the maximum percentage of total memory that be can be filled with dirty pages before user processes are forced to write dirty buffers themselves during their time slice instead of being allowed to do more writes. All processes are blocked for writes when this occurs due to synchronous I/O, not just the processes that filled the write buffers. This can cause what is perceived as unfair behavior where a single process can hog all the I/O on a system. As the value of dirty_ratio is increased, it is less likely that all processes will be blocked due to synchronous I/O, however, this allows for more data to be sitting in memory that has yet to be written to disk. As for all parameters in this reference architecture, there is no “one-size fits all” value and the recommendation should be only seen as a starting point.
+
 vm.dirty_ratio = 40
 vm.dirty_expire_centisecs = 500
 vm.dirty_writeback_centisecs = 100
