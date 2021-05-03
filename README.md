@@ -53,7 +53,7 @@ include=throughput-performance
 
 [sysctl]
 ```
-Swappiness is defined as a value from 0 to 100 which controls the degree to which the system
+Swappiness is defined as a value from `0` to `100` which controls the degree to which the system
 favors anonymous memory or the page cache. A high valueimproves file-system performance, while
 aggressively swapping less active processes out of memory. A low value avoids swapping processes
 out of memory, which usually decreases latency, at the cost of I/O performance.
@@ -64,14 +64,14 @@ will tune the kernel to swap less aggressively.
 vm.swappiness = 10
 ```
 Contains, as a percentage of total system memory, the number of pages at which the background write
-back daemon will start writing out dirty data. The Oracle recommended value is 3.
+back daemon will start writing out dirty data. The Oracle recommended value is `3`.
 ```
 vm.dirty_background_ratio = 3
 ```
 Contains, as a percentage of total system memory, the number of pages at which a process which is
-generating disk writes will itself start writing out dirty data. The default value is 20. The recommended
-value is between 40 and 80. The reasoning behind increasing the value from the standard Oracle 15
-recommendation to a value between 40 and 80 is because dirty ratio defines the maximum percentage of total
+generating disk writes will itself start writing out dirty data. The default value is `20`. The recommended
+value is between `40` and `80`. The reasoning behind increasing the value from the standard Oracle `15`
+recommendation to a value between `40` and `80` is because dirty ratio defines the maximum percentage of total
 memory that be can be filled with dirty pages before user processes are forced to write dirty buffers themselves
 during their time slice instead of being allowed to do more writes. All processes are blocked for writes
 when this occurs due to synchronous I/O, not just the processes that filled the write buffers. This can
@@ -83,13 +83,13 @@ should be only seen as a starting point.
 ```
 vm.dirty_ratio = 40
 ```
-Defines when dirty in-memory data is old enough to be eligible for writeout. The default value is 3000,
-expressed in hundredths of a second. The Oracle recommended value is 500.
+Defines when dirty in-memory data is old enough to be eligible for writeout. The default value is `3000`,
+expressed in hundredths of a second. The Oracle recommended value is `500`.
 ```
 vm.dirty_expire_centisecs = 500
 ```
-Defines the interval of when writes of dirty in-memory data are written out to disk. The default value is 500,
-expressed in hundredths of a second. The Oracle recommended value is 100.
+Defines the interval of when writes of dirty in-memory data are written out to disk. The default value is `500`,
+expressed in hundredths of a second. The Oracle recommended value is `100`.
 ```
 vm.dirty_writeback_centisecs = 100
 ```
@@ -98,15 +98,16 @@ Defines the maximum size (in bytes) of a single shared memory segment allowed by
 kernel.shmmax = 4398046511104
 ```
 Defines the total amount of shared memory pages that can be used on the system at one time. A
-page is 4096 bytes on the AMD64 and Intel 64 architecture.
+page is `4096` bytes on the AMD64 and Intel 64 architecture.
 ```
 kernel.shmall = 1073741824
 ```
-SHMMNI is the maximum total amount of shared memory segments. A default installation of
-Red Hat Enterprise Linux 7 x86_64 provides a SHMMNI default value of 4096. By optimizing the
-SHMMAX value with one shared memory segment per Oracle SGA, this parameter reflects the
+
+**SHMMNI** is the maximum total amount of shared memory segments. A default installation of
+Red Hat Enterprise Linux 7 x86_64 provides a SHMMNI default value of `4096`. By optimizing the
+**SHMMAX** value with one shared memory segment per Oracle SGA, this parameter reflects the
 maximum number of Oracle and ASM instances that can be started on a system. Oracle
-recommends the value of SHMMNI to be left at the default value of 4096.
+recommends the value of **SHMMNI** to be left at the default value of `4096`.
 ```
 kernel.shmmni = 4096
 ```
@@ -165,9 +166,9 @@ net.core.rmem_max = 4194304
 net.core.wmem_default = 262144
 net.core.wmem_max = 1048576
 ```
-The kernel parameter kernel.panic_on_oops controls the kernel's behavior when an oops or
-bug is encountered. By default the value is set to 1, however, the oracle installer requires it to
-be set within the /etc/sysctl.conf file.
+The kernel parameter `kernel.panic_on_oops` controls the kernel's behavior when an oops or
+bug is encountered. By default the value is set to `1`, however, the oracle installer requires it to
+be set within the `/etc/sysctl.conf` file.
 ```
 kernel.panic_on_oops = 1
 ```
